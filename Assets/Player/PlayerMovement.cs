@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                _moveDirection.y = 0f;
+               _moveDirection.y = 0f;
             }
 
             if (deltaX != 0 || deltaZ != 0)
