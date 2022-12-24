@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +14,12 @@ public class PlayerPosData : MonoBehaviour
             Positions.Add(transform.position);
         }
     }
-    
+
+    private void OnDestroy()
+    {
+        // cache the positions to disk
+    }
+
     private void OnDrawGizmos()
     {
         foreach (var position in Positions)
@@ -30,15 +34,7 @@ public class PlayerPosData : MonoBehaviour
             Gizmos.color = c;
             Gizmos.DrawCube(p, Vector3.one);
         }
-        
-        for (int i = 1; i < Positions.Count; i++)
-        {
-            Debug.DrawLine(Positions[i - 1], Positions[i]);
-        }
-    }
 
-    private void OnDestroy()
-    {
-        // cache the positions to disk
+        for (var i = 1; i < Positions.Count; i++) Debug.DrawLine(Positions[i - 1], Positions[i]);
     }
 }

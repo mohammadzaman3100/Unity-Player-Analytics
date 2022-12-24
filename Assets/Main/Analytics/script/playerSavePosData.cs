@@ -1,21 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 
 public class playerSavePosData : MonoBehaviour
 {
-    string path;
-    private List<Vector3> Positions = new List<Vector3>();
+    private readonly List<Vector3> Positions = new List<Vector3>();
+    private string path;
 
     public void Awake()
     {
         path = Application.dataPath + "/LogPlayerPosData.txt";
-        if (!File.Exists(path))
-        {
-            File.WriteAllText(path, "");
-        }
+        if (!File.Exists(path)) File.WriteAllText(path, "");
 
         // LoadPos();
     }
@@ -28,18 +24,15 @@ public class playerSavePosData : MonoBehaviour
             Positions.Add(transform.position);
         }
     }
-    
+
     private void OnDisable()
     {
         // testing saving data 
         Debug.Log($"Positions {Positions[0].ToString()}");
-        List<string> vectorJSON = new List<string>();
-        foreach (var vec in Positions)
-        {
-            vectorJSON.Add(JsonUtility.ToJson(vec));
-        }
+        var vectorJSON = new List<string>();
+        foreach (var vec in Positions) vectorJSON.Add(JsonUtility.ToJson(vec));
 
-        string _data = String.Join("|", vectorJSON);
+        var _data = string.Join("|", vectorJSON);
 
         //string dataAsJson = JsonUtility.ToJson(_data);
         File.AppendAllText(path, _data + '|');

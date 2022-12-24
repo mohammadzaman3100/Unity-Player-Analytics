@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,46 +11,37 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _moveDirection = Vector3.zero;
 
 
-    void Start()
+    private void Start()
     {
         _charCont = GetComponent<CharacterController>();
     }
 
-    void Update()
+    private void Update()
     {
-
         if (true)
-        {
             HandlePlayerMove();
-        }
         else
-        {
             HandlePlayerInactiveMove();
-        }
     }
 
     private void HandlePlayerMove()
     {
-        float deltaX = Input.GetAxis("Horizontal") * moveSpeed;
-        float deltaZ = Input.GetAxis("Vertical") * moveSpeed;
+        var deltaX = Input.GetAxis("Horizontal") * moveSpeed;
+        var deltaZ = Input.GetAxis("Vertical") * moveSpeed;
         _moveDirection = new Vector3(deltaX, _moveDirection.y, deltaZ);
 
         if (_charCont.isGrounded)
         {
             if (Input.GetButton("Jump"))
-            {
                 _moveDirection.y = jumpSpeed;
-            }
             else
-            {
-               _moveDirection.y = 0f;
-            }
+                _moveDirection.y = 0f;
 
             if (deltaX != 0 || deltaZ != 0)
             {
-                
             }
         }
+
         ApplyMovement();
     }
 
@@ -65,9 +54,9 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyMovement()
     {
         _moveDirection = transform.TransformDirection(_moveDirection);
-        
-        _moveDirection.y -= this.gravity * Time.deltaTime;
-        
+
+        _moveDirection.y -= gravity * Time.deltaTime;
+
         _charCont.Move(_moveDirection * Time.deltaTime);
     }
 }

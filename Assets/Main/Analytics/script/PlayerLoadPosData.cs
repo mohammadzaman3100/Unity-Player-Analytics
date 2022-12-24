@@ -1,18 +1,17 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 
 public class PlayerLoadPosData : MonoBehaviour
 {
-    string content;
-    string path;
-    private List<Vector3> Positions = new List<Vector3>();
+    private readonly List<Vector3> Positions = new List<Vector3>();
+    private string content;
+    private string path;
 
     public void Awake()
     {
-         path = Application.dataPath + "/LogPlayerPosData.txt";
+        path = Application.dataPath + "/LogPlayerPosData.txt";
         // if (!File.Exists(path))
         // {
         //     File.WriteAllText(path, "");
@@ -21,32 +20,17 @@ public class PlayerLoadPosData : MonoBehaviour
         LoadPos();
     }
 
-    void LoadPos()
-    {
-        string in_data = File.ReadAllText(path);
-        Debug.Log($"in_data {in_data}");
-        string[] jsonString = in_data.Split('|');
-        foreach (var json in jsonString)
-        {
-            if (json.Length > 0)
-            {
-                Vector3 p = JsonUtility.FromJson<Vector3>(json);
-                Positions.Add(p);
-            }
-        }
-    }
-
     private void OnDrawGizmos()
     {
-        Vector3 prev = Vector3.zero;
+        var prev = Vector3.zero;
         var c = Color.yellow;
         foreach (var position in Positions)
         {
             //this creates a box and line of the player's pos
             var p = position;
-            p.x = (int) p.x;
-            p.y = (int) p.y;
-            p.z = (int) p.z;
+            p.x = (int)p.x;
+            p.y = (int)p.y;
+            p.z = (int)p.z;
 
 
             c.a = 0.1f;
@@ -55,7 +39,7 @@ public class PlayerLoadPosData : MonoBehaviour
 
 
             // testing saving
-            myClass myClass01 = new myClass();
+            var myClass01 = new myClass();
             myClass01.Positions2 = Positions;
 
             //allpositions = new Vector3(p.x, p.y, p.z);
@@ -65,20 +49,29 @@ public class PlayerLoadPosData : MonoBehaviour
             Debug.Log(position);
         }
 
-        for (int i = 1; i < Positions.Count; i++)
+        for (var i = 1; i < Positions.Count; i++)
         {
             if (Vector3.Distance(Positions[i - 1], Positions[i]) > 2)
-            {
                 c = Color.black;
-            }
             else
-            {
                 c = Color.white;
-            }
 
             Debug.DrawLine(Positions[i - 1], Positions[i]);
             Gizmos.DrawLine(Positions[i - 1], Positions[i]);
         }
+    }
+
+    private void LoadPos()
+    {
+        var in_data = File.ReadAllText(path);
+        Debug.Log($"in_data {in_data}");
+        var jsonString = in_data.Split('|');
+        foreach (var json in jsonString)
+            if (json.Length > 0)
+            {
+                var p = JsonUtility.FromJson<Vector3>(json);
+                Positions.Add(p);
+            }
     }
 
     [Serializable]
