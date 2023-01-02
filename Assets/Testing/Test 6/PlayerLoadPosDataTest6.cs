@@ -11,7 +11,7 @@ public class PlayerLoadPosDataTest6 : MonoBehaviour
 
     private void Start()
     {
-        path = Application.dataPath + "/LogPlayerPosData.txt";
+        path = Application.dataPath + "/LogPlayerPosDataTest6.txt";
         LoadPositions();
     }
 

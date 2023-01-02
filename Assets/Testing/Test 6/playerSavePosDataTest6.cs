@@ -13,7 +13,7 @@ public class playerSavePosDataTest6 : MonoBehaviour
 
     public void Awake()
     {
-        path = Application.dataPath + "/LogPlayerPosData.txt";
+        path = Application.dataPath + "/LogPlayerPosDataTest6.txt";
         if (!File.Exists(path)) File.WriteAllText(path, "");
 
         // Store the initial position as the previous position

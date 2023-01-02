@@ -6,13 +6,13 @@ using UnityEngine;
 public class PlayerPosDataTest3 : MonoBehaviour
 {
     // Dictionary to store the visited positions and the time spent at each position
-    private Dictionary<Vector3, float> positions = new Dictionary<Vector3, float>();
+    public Dictionary<Vector3, float> positions = new Dictionary<Vector3, float>();
 
     private IEnumerator Start()
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
 
             // Store the current position and the time spent at that position
             var currentPosition = transform.position;
@@ -38,7 +38,7 @@ public class PlayerPosDataTest3 : MonoBehaviour
         // Create a gradient to map the time spent at each position to a color
         var gradient = new Gradient();
         gradient.SetKeys(
-            new GradientColorKey[] { new GradientColorKey(Color.yellow, 0.0f), new GradientColorKey(Color.red, 1.0f) },
+            new GradientColorKey[] { new GradientColorKey(Color.green, 0.0f), new GradientColorKey(Color.yellow, 0.5f), new GradientColorKey(Color.red, 1.0f) },
             new GradientAlphaKey[] { new GradientAlphaKey(0.1f, 0.0f), new GradientAlphaKey(0.1f, 1.0f) }
         );
 

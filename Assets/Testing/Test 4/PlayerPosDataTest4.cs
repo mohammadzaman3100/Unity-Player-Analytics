@@ -13,7 +13,7 @@ public class PlayerPosDataTest4 : MonoBehaviour
         while (true)
         {
             // Wait for half a second before recording the player's position again
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.05f);
             
             // Record the current time
             float currentTime = Time.time;
@@ -48,14 +48,14 @@ public class PlayerPosDataTest4 : MonoBehaviour
             position.z = (int)position.z;
 
             // Determine the color of the cube based on how much time has passed since the position was recorded
-            Color color = Color.yellow;
+            Color color = Color.red;
             if (Time.time - time < 1.0f)
             {
-                color = Color.red;
+                color = Color.green;
             }
             else if (Time.time - time < 2.0f)
             {
-                color = Color.green;
+                color = Color.yellow;
             }
             color.a = 0.1f;
             
