@@ -7,6 +7,9 @@ public class PlayerPosDataTest1 : MonoBehaviour
 
     private Vector3 previousPosition;
 
+    // Threshold value for change in position
+    public float threshold = 1.0f;
+
     private void Start()
     {
         previousPosition = transform.position;
@@ -14,8 +17,8 @@ public class PlayerPosDataTest1 : MonoBehaviour
 
     private void Update()
     {
-        // Only add the position if it has changed
-        if (previousPosition != transform.position)
+        // Only add the position if the change in position is greater than the threshold value
+        if (Vector3.Distance(previousPosition, transform.position) > threshold)
         {
             Positions.Add(transform.position);
             previousPosition = transform.position;
